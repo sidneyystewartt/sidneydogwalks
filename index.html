@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidney Dog Walks - NYC's Happiest Dog Walking Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #ff7675 50%, #fd79a8 75%, #a29bfe 100%);
+    min-height: 100vh;
+    color: #2d3436;
+    overflow-x: hidden;
+  }
+
+  /* Floating paw prints background */
+  .paws {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .paw {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: float 20s infinite linear;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
+  }
+
+  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+  /* Header / Hero */
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+  .logo-circle {
+    width: 140px; height: 140px;
+    background: white;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    animation: bounce 2s infinite ease-in-out;
+    border: 5px solid #fff;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 3px 3px 0 #ff7675, 6px 6px 20px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+  }
+  .tagline {
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+  }
+
+  /* CTA Button */
+  .cta-btn {
+    display: inline-block;
+    background: white;
+    color: #e84393;
+    padding: 22px 50px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 4px solid #fff;
+  }
+  .cta-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    background: #fffacd;
+  }
+  .cta-btn .heart { color: #e84393; }
+
+  /* Sections */
+  section {
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    padding: 50px 40px;
+    margin: 40px 0;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  }
+  section h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.5rem;
+    color: #e84393;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  section p { font-size: 1.15rem; line-height: 1.7; text-align: center; max-width: 750px; margin: 0 auto; }
+
+  /* Services grid */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+  .service-card {
+    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+    padding: 30px 20px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  .service-card:nth-child(2) { background: linear-gradient(135deg, #a29bfe, #fd79a8); }
+  .service-card:nth-child(3) { background: linear-gradient(135deg, #74b9ff, #81ecec); }
+  .service-card:nth-child(4) { background: linear-gradient(135deg, #ffeaa7, #55efc4); }
+  .service-card:hover { transform: translateY(-10px) rotate(-2deg); }
+  .service-icon { font-size: 3rem; margin-bottom: 10px; }
+  .service-card h3 {
+    font-family: 'Fredoka', sans-serif;
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  .service-card p { color: #fff; font-size: 0.95rem; font-weight: 500; }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+  .feature {
+    text-align: center;
+    padding: 20px;
+  }
+  .feature .emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; }
+  .feature h4 {
+    font-family: 'Fredoka', sans-serif;
+    color: #6c5ce7;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+  }
+
+  /* Testimonials */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+  .testimonial {
+    background: linear-gradient(135deg, #fff 0%, #ffeaa7 100%);
+    padding: 25px;
+    border-radius: 20px;
+    border-left: 5px solid #fd79a8;
+  }
+  .testimonial p {
+    font-style: italic;
+    text-align: left;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+  .testimonial .author {
+    font-weight: 700;
+    color: #e84393;
+    font-style: normal;
+  }
+  .stars { color: #fdcb6e; font-size: 1.3rem; margin-bottom: 8px; }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center;
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+    color: white;
+  }
+  .final-cta h2 { color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.2); }
+  .final-cta p { color: white; font-size: 1.2rem; margin-bottom: 30px; }
+  .final-cta .cta-btn { background: white; color: #e84393; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: white;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+  footer .contact { margin-top: 10px; font-size: 1rem; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2.8rem; }
+    .tagline { font-size: 1.1rem; }
+    section { padding: 35px 25px; }
+    section h2 { font-size: 1.9rem; }
+    .cta-btn { font-size: 1.15rem; padding: 18px 35px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="paws" id="paws"></div>
+
+<div class="container">
+
+  <header>
+    <div class="logo-circle">🐶</div>
+    <h1>Sidney Dog Walks</h1>
+    <p class="tagline">🐾 NYC's happiest, waggiest dog walking service 🐾</p>
+    <a href="https://calendly.com/sidneyystewartt" target="_blank" class="cta-btn">
+      🎉 Book a Free Dog Walk Today!
+    </a>
+  </header>
+
+  <section>
+    <h2>Hi, I'm Sidney! 👋</h2>
+    <p>
+      I'm a lifelong dog lover and certified pet care pro based right here in New York City.
+      Whether your pup needs a quick potty break, a romp in the park, or a long adventure walk,
+      I treat every dog like my own — with belly rubs, kind words, and lots of fresh air. 🌳🐕
+    </p>
+  </section>
+
+  <section>
+    <h2>What We Offer 🦴</h2>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🚶‍♀️</div>
+        <h3>30-min Walks</h3>
+        <p>Perfect for a midday stretch and bathroom break</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏃‍♀️</div>
+        <h3>60-min Adventures</h3>
+        <p>Park visits, sniffs, and tail-wagging fun</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🐾</div>
+        <h3>Group Walks</h3>
+        <p>Make new furry friends in the neighborhood</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💖</div>
+        <h3>Drop-in Visits</h3>
+        <p>Cuddles, feeding, and TLC while you're away</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why Choose Sidney? ✨</h2>
+    <div class="about-grid">
+      <div class="feature">
+        <span class="emoji">🏆</span>
+        <h4>Certified & Insured</h4>
+        <p>Pet First Aid certified and fully insured</p>
+      </div>
+      <div class="feature">
+        <span class="emoji">📍</span>
+        <h4>Manhattan Local</h4>
+        <p>Serving everything below 96th St — UES, UWS, Midtown, Chelsea, Village, SoHo, Tribeca & FiDi</p>
+      </div>
+      <div class="feature">
+        <span class="emoji">📸</span>
+        <h4>Pup Pics & Updates</h4>
+        <p>Real-time photos and GPS walk reports</p>
+      </div>
+      <div class="feature">
+        <span class="emoji">❤️</span>
+        <h4>Lots of Love</h4>
+        <p>Every dog gets treated like family</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Happy Tails 🐕💕</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Sidney is amazing! My golden retriever Biscuit literally jumps with joy every time she arrives. Best dog walker in NYC!"</p>
+        <div class="author">— Emma & Biscuit 🐕</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Reliable, kind, and so good with my anxious rescue pup. The daily photos make my workday!"</p>
+        <div class="author">— Marcus & Luna 🐶</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Sidney is a total pro. My two pugs come home tired and happy every single time. Highly recommend!"</p>
+        <div class="author">— Priya, Mochi & Dumpling 🐾</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <h2>Ready for a Walk? 🌟</h2>
+    <p>Your pup deserves the very best — let's set up a free meet & greet walk!</p>
+    <a href="https://calendly.com/sidneyystewartt" target="_blank" class="cta-btn">
+      🐾 Book a Free Dog Walk Today!
+    </a>
+  </section>
+
+  <footer>
+    <p>🐕 Sidney Dog Walks • Made with 💕 in NYC 🗽</p>
+    <p class="contact">📧 sidneyystewartt@gmail.com • 📱 (480) 845-3133</p>
+  </footer>
+
+</div>
+
+<script>
+  // Floating paw prints
+  const pawsContainer = document.getElementById('paws');
+  const pawEmojis = ['🐾', '🦴', '🐶', '❤️', '⭐'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'paw';
+    p.textContent = pawEmojis[Math.floor(Math.random() * pawEmojis.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.animationDuration = (15 + Math.random() * 15) + 's';
+    p.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+    pawsContainer.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
